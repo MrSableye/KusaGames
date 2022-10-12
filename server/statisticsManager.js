@@ -166,9 +166,9 @@ StatisticsManager.prototype.getCharacterMatchupStats = function(cname) {
 
 		for(let match of videoData.matches) {
 			let c;
-			for(let p1char of P1CharList(match)) {
+			for(let p1char of new Set(P1CharList(match))) {
 				if (p1char === cname) {
-					for(let p2char of P2CharList(match)) {
+					for(let p2char of new Set(P2CharList(match))) {
 						c = chars[p2char] || {
 							total: 0,
 							wins: 0,
@@ -187,9 +187,9 @@ StatisticsManager.prototype.getCharacterMatchupStats = function(cname) {
 					}
 				}
 			}
-			for(let p2char of P2CharList(match)) {
+			for(let p2char of new Set(P2CharList(match))) {
 				if (p2char === cname) {
-					for(let p1char of P1CharList(match)) {
+					for(let p1char of new Set(P1CharList(match))) {
 						c = chars[p1char] || {
 							total: 0,
 							wins: 0,
@@ -246,7 +246,7 @@ StatisticsManager.prototype.getPlayerCharacterStats = function(pname) {
 		for(let match of videoData.matches) {
 			let c;
 			if(match.p1name === pname) {
-				for(let p1char of P1CharList(match)) {
+				for(let p1char of new Set(P1CharList(match))) {
 					c = chars[p1char] || {
 						total: 0,
 						wins: 0,
@@ -264,7 +264,7 @@ StatisticsManager.prototype.getPlayerCharacterStats = function(pname) {
 					chars[p1char] = c;
 				}
 			} else if(match.p2name === pname) {
-				for(let p2char of P2CharList(match)) {
+				for(let p2char of new Set(P2CharList(match))) {
 					c = chars[p2char] || {
 						total: 0,
 						wins: 0,
@@ -352,7 +352,7 @@ StatisticsManager.prototype.getCharacterStats = function() {
 		if(videoData.provIP) continue;
 		
 		for(let match of videoData.matches) {
-			for(let p1char of P1CharList(match)) {
+			for(let p1char of new Set(P1CharList(match))) {
 				let c1 = chars[p1char] || {
 					total: 0,
 					wins: 0,
@@ -373,7 +373,7 @@ StatisticsManager.prototype.getCharacterStats = function() {
 				chars[p1char] = c1;
 			}
 
-			for(let p2char of P2CharList(match)) {
+			for(let p2char of new Set(P2CharList(match))) {
 				let c2 = chars[p2char] || {
 					total: 0,
 					wins: 0,
