@@ -6,9 +6,13 @@ const SearchManager = require("./searchManager.js");
 const MatchManager = require("./matchManager.js");
 const Logger = require("./logger.js");
 const charIdMap = require("./charIdMap.js");
+const mapIdMap = require("./mapIdMap");
+const rankIdMap = require("./rankIdMap.js");
 
 function Server(cfg, app) {
 	this.charMap = charIdMap;
+	this.mapMap = mapIdMap;
+	this.rankMap = rankIdMap;
 	this.cfg = cfg;
 	this.app = app;
 	this.templateManager = new TemplateManager(this);
@@ -58,7 +62,7 @@ Server.prototype.approveCheck = function(auth, req) {
 Server.prototype.setupRoutes = function() {
 	this.app.get("/", (req, res) => {
 		let searchResult = null;
-		
+
 		if(Object.keys(req.query).length > 0) {
 			searchResult = this.searchManager.search(this.games, req.query);
 		}
@@ -214,7 +218,7 @@ Server.prototype.setupRoutes = function() {
 					vid
 				}),
 				date: this.games[vid] && this.games[vid].date,
-				netplay: this.games[vid] && this.games[vid].netplay,
+				platform: this.games[vid] && this.games[vid].platform,
 				tags: this.games[vid] && this.games[vid].tags,
 			}
 			res.send(JSON.stringify(json));

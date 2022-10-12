@@ -28,12 +28,12 @@ MatchManger.prototype.validateAddEditVideoForm = function(form) {
 		return "Invalid date.";
 	}
 
-	if(!form.netplay) {
-		return "Set if the video is netplay or locals(offline)";
+	if(!form.platform) {
+		return "Set if the video is Arcade or PC";
 	}
 
-	if(form.netplay !== "L" && form.netplay !== "N") {
-		return "Invalid netplay value";
+	if(form.platform !== "A" && form.platform !== "PC") {
+		return "Invalid platform value";
 	}
 
 	if(!form.tags || typeof form.tags !== "string") {
@@ -54,12 +54,12 @@ MatchManger.prototype.editVideo = function(form, ip, auth) {
 		log += `VideoID: ${form.vid}\t`;
 		log += `Tags: ${form.tags}\t`;
 		log += `Date: ${form.date}\t`;
-		log += `Netplay: ${form.netplay}.`;
+		log += `Platform: ${form.platform}.`;
 		this.server.logger.log(log, ip, auth);
 
 		videoData.id = form.vid;
 		videoData.date = form.date;
-		videoData.netplay = form.netplay;
+		videoData.platform = form.platform;
 		videoData.tags = form.tags;
 		videoData.provIP = auth ? null : ip;
 		videoData.matches = [];
@@ -90,12 +90,12 @@ MatchManger.prototype.addMatch = function(form, ip, auth) {
 		log += `VideoID: ${form.vid}\t`;
 		log += `Tags: ${form.tags}\t`;
 		log += `Date: ${form.date}\t`;
-		log += `Netplay: ${form.netplay}.`;
+		log += `Platform: ${form.platform}.`;
 		this.server.logger.log(log, ip, auth);
 
 		videoData.id = form.vid;
 		videoData.date = form.date;
-		videoData.netplay = form.netplay;
+		videoData.platform = form.platform;
 		videoData.tags = form.tags;
 		videoData.provIP = auth ? null : ip;
 		videoData.matches = [];
@@ -111,10 +111,19 @@ MatchManger.prototype.addMatch = function(form, ip, auth) {
 	videoData.matches.push({
 		"time": parseInt(form.time),
 		"readableTime": utils.convertSecondsToReadable(form.time),
-		"p1char": form.p1char,
+		"p1char1": form.p1char1,
+		"p1char2": form.p1char2,
+		"p1char3": form.p1char3,
+		"p1char4": form.p1char4,
 		"p1name": form.p1name,
-		"p2char": form.p2char,
+		"p1rank": form.p1rank,
+		"p2char1": form.p2char1,
+		"p2char2": form.p2char2,
+		"p2char3": form.p2char3,
+		"p2char4": form.p2char4,
 		"p2name": form.p2name,
+		"p2rank": form.p2rank,
+		"map": form.map,
 		"winner": form.winner
 	});
 
@@ -132,8 +141,9 @@ MatchManger.prototype.addMatch = function(form, ip, auth) {
 	let log = `Added ${auth ? "" : "provisional "}match\t`;
 	log += `VideoID: ${form.vid}\t`;
 	log += `Time: ${form.readableTime}\t`;
-	log += `P1: ${form.p1char} ${form.p1name}\t`;
-	log += `P2: ${form.p2char} ${form.p2name}\t`;
+	log += `P1: [${form.p1char1}, ${form.p1char2}, ${form.p1char3}, ${form.p1char4}] ${form.p1name} ${form.p1rank}\t`;
+	log += `P2: [${form.p2char1}, ${form.p2char2}, ${form.p2char3}, ${form.p2char4}] ${form.p2name} ${form.p2rank}\t`;
+	log += `Map: ${form.map}\t`;
 	log += `Winner: ${form.winner}.`;
 	this.server.logger.log(log, ip, auth);
 
@@ -167,21 +177,57 @@ MatchManger.prototype.editMatch = function(form, ip, auth) {
 		match.time = parseInt(form.time);
 		match.readableTime = utils.convertSecondsToReadable(match.time);
 	}
-	if(match.p1char !== form.p1char) {
-		log += `P1 Char from: ${match.p1char} to ${form.p1char}\t`;
-		match.p1char = form.p1char;
+	if(match.p1char1 !== form.p1char1) {
+		log += `P1 Char 1 from: ${match.p1char1} to ${form.p1char1}\t`;
+		match.p1char1 = form.p1char1;
+	}
+	if(match.p1char2 !== form.p1char2) {
+		log += `P1 Char 2 from: ${match.p1char2} to ${form.p1char2}\t`;
+		match.p1char2 = form.p1char2;
+	}
+	if(match.p1char3 !== form.p1char3) {
+		log += `P1 Char 3 from: ${match.p1char3} to ${form.p1char3}\t`;
+		match.p1char3 = form.p1char3;
+	}
+	if(match.p1char4 !== form.p1char4) {
+		log += `P1 Char 4 from: ${match.p1char4} to ${form.p1char4}\t`;
+		match.p1char4 = form.p1char4;
 	}
 	if(match.p1name !== form.p1name) {
 		log += `P1 Name from: ${match.p1name} to ${form.p1name}\t`;
 		match.p1name = form.p1name;
 	}
-	if(match.p2char !== form.p2char) {
-		log += `P2 Char from: ${match.p2char} to ${form.p2char}\t`;
-		match.p2char = form.p2char;
+	if(match.p1rank !== form.p1rank) {
+		log += `P1 Rank from: ${match.p1rank} to ${form.p1rank}\t`;
+		match.p1rank = form.p1rank;
+	}
+	if(match.p2char1 !== form.p2char1) {
+		log += `P2 Char 1 from: ${match.p2char1} to ${form.p2char1}\t`;
+		match.p2char1 = form.p2char1;
+	}
+	if(match.p2char2 !== form.p2char2) {
+		log += `P2 Char 2 from: ${match.p2char2} to ${form.p2char2}\t`;
+		match.p2char2 = form.p2char2;
+	}
+	if(match.p2char3 !== form.p2char3) {
+		log += `P2 Char 3 from: ${match.p2char3} to ${form.p2char3}\t`;
+		match.p2char3 = form.p2char3;
+	}
+	if(match.p2char4 !== form.p2char4) {
+		log += `P2 Char 4 from: ${match.p2char4} to ${form.p2char4}\t`;
+		match.p2char4 = form.p2char4;
 	}
 	if(match.p2name !== form.p2name) {
 		log += `P2 Name from: ${match.p2name} to ${form.p2name}\t`;
 		match.p2name = form.p2name;
+	}
+	if(match.p2rank !== form.p2rank) {
+		log += `P2 Rank from: ${match.p2rank} to ${form.p2rank}\t`;
+		match.p2rank = form.p2rank;
+	}
+	if(match.map !== form.map) {
+		log += `Map from: ${match.map} to ${form.map}\t`;
+		match.map = form.map;
 	}
 	if(match.winner !== form.winner) {
 		log += `Winner from: ${match.winner} to ${form.winner}\t`;
@@ -220,14 +266,14 @@ MatchManger.prototype.editVideoSpecificFields = function(videoData, form, ip, au
 		videoData.tags = form.tags;
 	}
 
-	if(videoData.netplay !== form.netplay) {
+	if(videoData.platform !== form.platform) {
 		let log = "Modified video\t";
 		log += `VideoID: ${form.vid}\t`;
-		log += `Netplay From: ${videoData.netplay}\t`;
-		log += `Netplay To: ${form.netplay}.`;
+		log += `Platform From: ${videoData.platform}\t`;
+		log += `Platform To: ${form.platform}.`;
 		this.server.logger.log(log, ip, auth);
 
-		videoData.netplay = form.netplay;
+		videoData.platform = form.platform;
 	}
 };
 
@@ -252,8 +298,9 @@ MatchManger.prototype.deleteMatch = function(form, ip, auth) {
 			let log = `Deleted ${auth ? "" : "provisional "}match\t`;
 			log += `VideoID: ${form.vid}\t`;
 			log += `Time: ${m.time}\t`;
-			log += `P1: ${m.p1char} ${m.p1name}\t`;
-			log += `P2: ${m.p2char} ${m.p2name}\t`;
+			log += `P1: [${m.p1char1}, ${m.p1char2}, ${m.p1char3}, ${m.p1char4}] ${m.p1name} ${m.p1rank}\t`;
+			log += `P2: [${m.p2char1}, ${m.p2char2}, ${m.p2char3}, ${m.p2char4}] ${m.p2name} ${m.p2rank}\t`;
+			log += `Map: ${m.map}\t`;
 			log += `Winner: ${m.winner}.`;
 			this.server.logger.log(log, ip, auth);
 
@@ -278,17 +325,71 @@ MatchManger.prototype.validateAddEditMatchForm = function(form, skipCloseTimeChe
 	if(parseInt(form.time).toString() !== form.time.toString() || parseInt(form.time) < 0) {
 		return "Invalid time.";
 	}
-	if(!form.p1char) {
-		return "Select player 1 character.";
+	if(!form.p1char1) {
+		return "Select player 1 character 1.";
 	}
-	if(!this.server.charMap[form.p1char]) {
-		return "Select player 1 character.";
+	if(!this.server.charMap[form.p1char1]) {
+		return "Select player 1 character 1.";
 	}
-	if(!form.p2char) {
-		return "Select player 2 character.";
+	if(!form.p1char2) {
+		return "Select player 1 character 2.";
 	}
-	if(!this.server.charMap[form.p2char]) {
-		return "Select player 2 character.";
+	if(!this.server.charMap[form.p1char2]) {
+		return "Select player 1 character 2.";
+	}
+	if(!form.p1char3) {
+		return "Select player 1 character 3.";
+	}
+	if(!this.server.charMap[form.p1char3]) {
+		return "Select player 1 character 3.";
+	}
+	if(!form.p1char4) {
+		return "Select player 1 character 4.";
+	}
+	if(!this.server.charMap[form.p1char4]) {
+		return "Select player 1 character 4.";
+	}
+	if(!form.p1rank) {
+		return "Select player 1 rank.";
+	}
+	if(!this.server.rankMap[form.p1rank]) {
+		return "Select player 1 rank.";
+	}
+	if(!form.p2char1) {
+		return "Select player 2 character 1.";
+	}
+	if(!this.server.charMap[form.p2char1]) {
+		return "Select player 2 character 1.";
+	}
+	if(!form.p2char2) {
+		return "Select player 2 character 2.";
+	}
+	if(!this.server.charMap[form.p2char2]) {
+		return "Select player 2 character 2.";
+	}
+	if(!form.p2char3) {
+		return "Select player 2 character 3.";
+	}
+	if(!this.server.charMap[form.p2char3]) {
+		return "Select player 2 character 3.";
+	}
+	if(!form.p2char4) {
+		return "Select player 2 character 4.";
+	}
+	if(!this.server.charMap[form.p2char4]) {
+		return "Select player 2 character 4.";
+	}
+	if(!form.p2rank) {
+		return "Select player 2 rank.";
+	}
+	if(!this.server.rankMap[form.p2rank]) {
+		return "Select player 2 rank.";
+	}
+	if(!form.map) {
+		return "Select a map.";
+	}
+	if(!this.server.mapMap[form.map]) {
+		return "Select a map.";
 	}
 	if(form.winner !== "1" && form.winner !== "2" && form.winner !== "D") {
 		return "Select the winner of the match.";

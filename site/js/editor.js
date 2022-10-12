@@ -14,16 +14,25 @@ function Editor(videoId) {
 	this.PlayPauseButton = document.getElementById("PlayPauseButton");
 	this.EnterTokenButton = document.getElementById("EnterTokenButton");
 
-	this.P1Char = document.getElementById("P1Char");
+	this.P1Char1 = document.getElementById("P1Char1");
+	this.P1Char2 = document.getElementById("P1Char2");
+	this.P1Char3 = document.getElementById("P1Char3");
+	this.P1Char4 = document.getElementById("P1Char4");
 	this.P1Name = document.getElementById("P1Name");
 	this.P1NameList = document.getElementById("p1name-list");
-	this.P2Char = document.getElementById("P2Char");
+	this.P1Rank = document.getElementById("P1Rank");
+	this.P2Char1 = document.getElementById("P2Char1");
+	this.P2Char2 = document.getElementById("P2Char2");
+	this.P2Char3 = document.getElementById("P2Char3");
+	this.P2Char4 = document.getElementById("P2Char4");
 	this.P2Name = document.getElementById("P2Name");
 	this.P2NameList = document.getElementById("p2name-list");
+	this.P2Rank = document.getElementById("P2Rank");
 	this.VideoDate = document.getElementById("VideoDate");
+	this.MapSelect = document.getElementById("MapSelect");
 	this.WinnerSelect = document.getElementById("WinnerSelect");
 	this.VideoTags = document.getElementById("VideoTags");
-	this.NetplaySelect = document.getElementById("NetplaySelect");
+	this.PlatformSelect = document.getElementById("PlatformSelect");
 	this.UpdateVideoDataButton = document.getElementById("UpdateVideoDataButton");
 	this.ActionButton = document.getElementById("ActionButton");
 	this.TimeRefreshButton = document.getElementById("TimeRefreshButton");
@@ -78,7 +87,7 @@ Editor.prototype.setupEvents = function() {
 		let obj = {
 			vid: this.YoutubePlayer.getVideoData().video_id,
 			date: this.VideoDate.value,
-			netplay: this.NetplaySelect.value,
+			platform: this.PlatformSelect.value,
 			tags: this.VideoTags.value.trim()
 		};
 
@@ -147,23 +156,33 @@ Editor.prototype.updatePlayerTipContent = function() {
 	for(let row of tbody.rows) {
 		let p1name = row.querySelector(".player-1 span").innerText.trim();
 		if(p1name.length > 0) {
-			let p1char = row.querySelector(".player-1 img").dataset.char;
-			unique[p1char+p1name] = {name: p1name, char: p1char};
+			let p1char1 = row.querySelector(".player-1 img.char1").dataset.char;
+			let p1char2 = row.querySelector(".player-1 img.char2").dataset.char;
+			let p1char3 = row.querySelector(".player-1 img.char3").dataset.char;
+			let p1char4 = row.querySelector(".player-1 img.char4").dataset.char;
+			let p1chars = SortChars(p1char1, p1char2, p1char3, p1char4);
+			let p1rank = row.querySelector(".player-1 img.rank-img").dataset.rank;
+			unique[p1chars.join(':')+p1name+p1rank] = {name: p1name, char1: p1char1, char2: p1char2, char3: p1char3, char4: p1char4, rank: p1rank};
 		}
 		let p2name = row.querySelector(".player-2 span").innerText.trim();
 		if(p2name.length > 0) {
-			let p2char = row.querySelector(".player-2 img").dataset.char;
-			unique[p2char+p2name] = {name: p2name, char: p2char};
+			let p2char1 = row.querySelector(".player-2 img.char1").dataset.char;
+			let p2char2 = row.querySelector(".player-2 img.char2").dataset.char;
+			let p2char3 = row.querySelector(".player-2 img.char3").dataset.char;
+			let p2char4 = row.querySelector(".player-2 img.char4").dataset.char;
+			let p2chars = SortChars(p2char1, p2char2, p2char3, p2char4);
+			let p2rank = row.querySelector(".player-2 img.rank-img").dataset.rank;
+			unique[p2chars.join(':')+p2name+p2rank] = {name: p2name, char1: p2char1, char2: p2char2, char3: p2char3, char4: p2char4, rank: p2rank};
 		}
 	}
 
 	let arr = Object.values(unique);
 	for(let obj of arr) {
-		this.PlayerTip.appendChild(this.buildTipEntry(obj.char, obj.name));
+		this.PlayerTip.appendChild(this.buildTipEntry(obj.char1, obj.char2, obj.char3, obj.char4, obj.name, obj.rank));
 	}
 };
 
-Editor.prototype.buildTipEntry = function(char, name) {
+Editor.prototype.buildTipEntry = function(char1, char2, char3, char4, name, rank) {
 	let container = document.createElement("div");
 	
 	let p1button = document.createElement("button");
@@ -174,21 +193,41 @@ Editor.prototype.buildTipEntry = function(char, name) {
 	p2button.classList = "ms-small ms-info";
 	p1button.onclick = () => {
 		this.P1Name.value = name;
-		this.P1Char.value = char;
+		this.P1Char1.value = char1;
+		this.P1Char2.value = char2;
+		this.P1Char3.value = char3;
+		this.P1Char4.value = char4;
+		this.P1Rank.value = rank;
 	};
 	p2button.onclick = () => {
 		this.P2Name.value = name;
-		this.P2Char.value = char;
+		this.P2Char1.value = char1;
+		this.P2Char2.value = char2;
+		this.P2Char3.value = char3;
+		this.P2Char4.value = char4;
+		this.P2Rank.value = rank;
 	};
 	container.appendChild(p1button);
 	container.appendChild(p2button);
 
-	let charImg = document.createElement("img");
-	charImg.src = `img/chars/${char}.png`;
+	let char1Img = document.createElement("img");
+	char1Img.src = `img/chars/${char1}.png`;
+	let char2Img = document.createElement("img");
+	char2Img.src = `img/chars/${char2}.png`;
+	let char3Img = document.createElement("img");
+	char3Img.src = `img/chars/${char3}.png`;
+	let char4Img = document.createElement("img");
+	char4Img.src = `img/chars/${char4}.png`;
 	let playerName = document.createElement("span");
 	playerName.innerText = name;
-	container.appendChild(charImg);
+	let rankImg = document.createElement("img");
+	rankImg.src = `img/ranks/${rank}.png`;
+	container.appendChild(char1Img);
+	container.appendChild(char2Img);
+	container.appendChild(char3Img);
+	container.appendChild(char4Img);
 	container.appendChild(playerName);
+	container.appendChild(rankImg);
 	
 	return container;
 };
@@ -203,7 +242,7 @@ Editor.prototype.updateMatchList = function(vid) {
 		r.json().then(json => {
 			this.ResultsList.innerHTML = json.html || "";
 			this.VideoDate.value = json.date || "";
-			this.NetplaySelect.value = json.netplay || "";
+			this.PlatformSelect.value = json.platform || "";
 			this.VideoTags.value = json.tags ? json.tags.join("|") : "";
 
 			//Go To buttons events
@@ -220,10 +259,19 @@ Editor.prototype.updateMatchList = function(vid) {
 					this.editButtonPress(
 						btn,
 						parseInt(btn.dataset.idx),
-						btn.dataset.p1char,
+						btn.dataset.p1char1,
+						btn.dataset.p1char2,
+						btn.dataset.p1char3,
+						btn.dataset.p1char4,
 						btn.dataset.p1name,
-						btn.dataset.p2char,
+						btn.dataset.p1rank,
+						btn.dataset.p2char1,
+						btn.dataset.p2char2,
+						btn.dataset.p2char3,
+						btn.dataset.p2char4,
 						btn.dataset.p2name,
+						btn.dataset.p2rank,
+						btn.dataset.map,
 						btn.dataset.winner,
 						parseInt(btn.dataset.time),
 						btn.dataset.seek === "1"
@@ -243,7 +291,7 @@ Editor.prototype.updateMatchList = function(vid) {
 	});
 };
 
-Editor.prototype.editButtonPress = function(btn, idx, p1char, p1name, p2char, p2name, winner, time, seek) {
+Editor.prototype.editButtonPress = function(btn, idx, p1char1, p1char2, p1char3, p1char4, p1name, p1rank, p2char1, p2char2, p2char3, p2char4, p2name, p2rank, map, winner, time, seek) {
 	this.ActionButton.innerText = "Edit";
 
 	if(seek) {
@@ -251,10 +299,19 @@ Editor.prototype.editButtonPress = function(btn, idx, p1char, p1name, p2char, p2
 	}
 	this.onTimeChange(time);
 
-	this.P1Char.value = p1char;
+	this.P1Char1.value = p1char1;
+	this.P1Char2.value = p1char2;
+	this.P1Char3.value = p1char3;
+	this.P1Char4.value = p1char4;
 	this.P1Name.value = p1name;
-	this.P2Char.value = p2char;
+	this.P1Rank.value = p1rank;
+	this.P2Char1.value = p2char1;
+	this.P2Char2.value = p2char2;
+	this.P2Char3.value = p2char3;
+	this.P2Char4.value = p2char4;
 	this.P2Name.value = p2name;
+	this.P2Rank.value = p2rank;
+	this.MapSelect.value = map;
 	this.WinnerSelect.value = winner;
 
 	if(this._editingRow) {
@@ -273,12 +330,21 @@ Editor.prototype.editMatch = function() {
 		vid: this.YoutubePlayer.getVideoData().video_id,
 		date: this.VideoDate.value,
 		time: this.time,
-		netplay: this.NetplaySelect.value,
+		platform: this.PlatformSelect.value,
 		orderIndex: this._editingOrderIndex,
-		p1char: this.P1Char.value,
+		p1char1: this.P1Char1.value,
+		p1char2: this.P1Char2.value,
+		p1char3: this.P1Char3.value,
+		p1char4: this.P1Char4.value,
 		p1name: this.P1Name.value.trim(),
-		p2char: this.P2Char.value,
+		p1rank: this.P1Rank.value,
+		p2char1: this.P2Char1.value,
+		p2char2: this.P2Char2.value,
+		p2char3: this.P2Char3.value,
+		p2char4: this.P2Char4.value,
 		p2name: this.P2Name.value.trim(),
+		p2rank: this.P2Rank.value,
+		map: this.MapSelect.value,
 		winner: this.WinnerSelect.value,
 		tags: this.VideoTags.value.trim()
 	};
@@ -332,11 +398,20 @@ Editor.prototype.addMatch = function() {
 		date: this.VideoDate.value,
 		time: this.time,
 		readableTime: ConvertSecondsToReadable(this.time),
-		netplay: this.NetplaySelect.value,
-		p1char: this.P1Char.value,
+		platform: this.PlatformSelect.value,
+		p1char1: this.P1Char1.value,
+		p1char2: this.P1Char2.value,
+		p1char3: this.P1Char3.value,
+		p1char4: this.P1Char4.value,
 		p1name: this.P1Name.value.trim(),
-		p2char: this.P2Char.value,
+		p1rank: this.P1Rank.value,
+		p2char1: this.P2Char1.value,
+		p2char2: this.P2Char2.value,
+		p2char3: this.P2Char3.value,
+		p2char4: this.P2Char4.value,
 		p2name: this.P2Name.value.trim(),
+		p2rank: this.P2Rank.value,
+		map: this.MapSelect.value,
 		winner: this.WinnerSelect.value,
 		tags: this.VideoTags.value.trim()
 	};
@@ -472,4 +547,10 @@ function ConvertSecondsToReadable(time) {
 	}
 
 	return str;
+}
+
+function SortChars(char1, char2, char3, char4) {
+	let chars = [char1, char2, char3, char4];
+	chars.sort();
+	return chars;
 }

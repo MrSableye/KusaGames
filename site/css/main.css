@@ -128,9 +128,18 @@ a {
 .nowrap {
 	white-space: nowrap;	
 }
-.matchup img {
+.matchup .char-img {
 	width: 48px;
 	max-width: 60px;
+	padding: 4px;
+	image-rendering: -webkit-optimize-contrast;
+	border-radius: var(--rgb-border-width);
+	background: var(--default-bg);
+}
+.matchup .rank-img {
+	width: 48px;
+	max-width: 60px;
+	padding: 4px;
 	image-rendering: -webkit-optimize-contrast;
 	border-radius: var(--rgb-border-width);
 	background: var(--default-bg);

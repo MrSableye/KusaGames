@@ -15,9 +15,13 @@
 			</div>
 		</div>
 		<div class="container char-select p-2">
-			<div class="char-img-wrap"><img class="char-img" src="/img/chars/c1.png" data-id="c1"></div>
-			<div class="char-img-wrap"><img class="char-img" src="/img/chars/c2.png" data-id="c2"></div>
-			<div class="char-img-wrap"><img class="char-img" src="/img/chars/c3.png" data-id="c3"></div>
+			<%
+			for(let char in server.charMap) {
+				%>
+				<div class="char-img-wrap"><img class="char-img" src="/img/chars/<%=char%>.png" data-id="<%=char%>"></div>
+				<%
+			}
+			%>
 		</div>
 		<img id="bg-img" class="bg-img" src="">
 		<div id="char-info-container" class="container char-info" hidden>

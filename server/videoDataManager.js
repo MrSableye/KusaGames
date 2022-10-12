@@ -30,7 +30,7 @@ VideoDataManager.prototype.getJSON = function() {
 			let obj = {
 				"id": currentVideoId,
 				"date": split[1],
-				"netplay": split[2],
+				"platform": split[2],
 				"tags": split[3] ? split[3].split("|") : [],
 				"provIP": split[4] ? split[4] : null,
 				"matches": [],
@@ -43,11 +43,20 @@ VideoDataManager.prototype.getJSON = function() {
 				"orderIndex": output[currentVideoId].matches.length + 1,
 				"time": parseInt(split[0]),
 				"readableTime": utils.convertSecondsToReadable(split[0]),
-				"p1char": split[1],
-				"p1name": split[2],
-				"p2char": split[3],
-				"p2name": split[4],
-				"winner": split[5],
+				"p1char1": split[1],
+				"p1char2": split[2],
+				"p1char3": split[3],
+				"p1char4": split[4],
+				"p1name": split[5],
+				"p1rank": split[6],
+				"p2char1": split[7],
+				"p2char2": split[8],
+				"p2char3": split[9],
+				"p2char4": split[10],
+				"p2name": split[11],
+				"p2rank": split[12],
+				"map": split[13],
+				"winner": split[14],
 				"videoData": output[currentVideoId] // Circular
 			});
 		}
@@ -72,15 +81,15 @@ VideoDataManager.prototype.saveData = function(json) {
 		}
 
 		let data = json[vid];
-		str += `${vid}\t${data.date}\t${data.netplay}\t${data.tags.map(t => t.trim()).join("|")}\t${data.provIP||""}\n`;
+		str += `${vid}\t${data.date}\t${data.platform}\t${data.tags.map(t => t.trim()).join("|")}\t${data.provIP||""}\n`;
 
 		data.matches.sort((a, b) => {
 			return a.time - b.time;
 		});
 
 		data.matches.forEach(m => {
-			str += `${m.time}\t${m.p1char}\t${m.p1name}\t`;
-			str += `${m.p2char}\t${m.p2name}\t${m.winner}\n`;
+			str += `${m.time}\t${m.p1char1}\t${m.p1char2}\t${m.p1char3}\t${m.p1char4}\t${m.p1name}\t${m.p1rank}\t`;
+			str += `${m.p2char1}\t${m.p2char2}\t${m.p2char3}\t${m.p2char4}\t${m.p2name}\t${m.p2rank}\t${m.map}\t${m.winner}\n`;
 		});
 	}
 

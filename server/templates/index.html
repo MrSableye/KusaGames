@@ -24,7 +24,63 @@
 							<div class="ms-form-group">
 								<label><b>PLAYER 1</b></label>
 								<span class="select">
-									<select id="p1char" name="p1char">
+									<select id="p1rank" name="p1rank">
+										<option value="">Select rank</option>
+										<%
+										for(let rank in server.rankMap) {
+											%>
+											<option value="<%=rank%>"><%=server.rankMap[rank].name%></option>
+											<%
+										}
+										%>
+									</select>
+								</span>
+							</div>
+							<div class="ms-form-group">
+								<span class="select">
+									<select id="p1char1" name="p1char1">
+										<option value="">Select character</option>
+										<%
+										for(let char in server.charMap) {
+											%>
+											<option value="<%=char%>"><%=server.charMap[char].name%></option>
+											<%
+										}
+										%>
+									</select>
+								</span>
+							</div>
+							<div class="ms-form-group">
+								<span class="select">
+									<select id="p1char2" name="p1char2">
+										<option value="">Select character</option>
+										<%
+										for(let char in server.charMap) {
+											%>
+											<option value="<%=char%>"><%=server.charMap[char].name%></option>
+											<%
+										}
+										%>
+									</select>
+								</span>
+							</div>
+							<div class="ms-form-group">
+								<span class="select">
+									<select id="p1char3" name="p1char3">
+										<option value="">Select character</option>
+										<%
+										for(let char in server.charMap) {
+											%>
+											<option value="<%=char%>"><%=server.charMap[char].name%></option>
+											<%
+										}
+										%>
+									</select>
+								</span>
+							</div>
+							<div class="ms-form-group">
+								<span class="select">
+									<select id="p1char4" name="p1char4">
 										<option value="">Select character</option>
 										<%
 										for(let char in server.charMap) {
@@ -51,6 +107,20 @@
 							<div class="ms-form-group">
 								<label><b>MATCH DETAILS</b></label>
 								<span class="select">
+									<select id="map" name="map">
+										<option value="">Select map</option>
+										<%
+										for(let map in server.mapMap) {
+											%>
+											<option value="<%=map%>"><%=server.mapMap[map].name%></option>
+											<%
+										}
+										%>
+									</select>
+								</span>
+							</div>
+							<div class="ms-form-group">
+								<span class="select">
 									<select id="winner" name="winner">
 										<option value="">Select winner</option>
 										<option value="1">Player 1</option>
@@ -61,10 +131,10 @@
 							</div>
 							<div class="ms-form-group">
 								<span class="select">
-									<select id="net" name="net">
-										<option value="">Locals and Netplay</option>
-										<option value="L">Locals only</option>
-										<option value="N">Netplay only</option>
+									<select id="platform" name="platform">
+										<option value="">Arcade and PC</option>
+										<option value="A">Arcade only</option>
+										<option value="PC">PC only</option>
 									</select>
 								</span>
 							</div>
@@ -73,7 +143,63 @@
 							<div class="ms-form-group">
 								<label><b>PLAYER 2</b></label>
 								<span class="select">
-									<select id="p2char" name="p2char">
+									<select id="p2rank" name="p2rank">
+										<option value="">Select rank</option>
+										<%
+										for(let rank in server.rankMap) {
+											%>
+											<option value="<%=rank%>"><%=server.rankMap[rank].name%></option>
+											<%
+										}
+										%>
+									</select>
+								</span>
+							</div>
+							<div class="ms-form-group">
+								<span class="select">
+									<select id="p2char1" name="p2char1">
+										<option value="">Select character</option>
+										<%
+										for(let char in server.charMap) {
+											%>
+											<option value="<%=char%>"><%=server.charMap[char].name%></option>
+											<%
+										}
+										%>
+									</select>
+								</span>
+							</div>
+							<div class="ms-form-group">
+								<span class="select">
+									<select id="p2char2" name="p2char2">
+										<option value="">Select character</option>
+										<%
+										for(let char in server.charMap) {
+											%>
+											<option value="<%=char%>"><%=server.charMap[char].name%></option>
+											<%
+										}
+										%>
+									</select>
+								</span>
+							</div>
+							<div class="ms-form-group">
+								<span class="select">
+									<select id="p2char3" name="p2char3">
+										<option value="">Select character</option>
+										<%
+										for(let char in server.charMap) {
+											%>
+											<option value="<%=char%>"><%=server.charMap[char].name%></option>
+											<%
+										}
+										%>
+									</select>
+								</span>
+							</div>
+							<div class="ms-form-group">
+								<span class="select">
+									<select id="p2char4" name="p2char4">
 										<option value="">Select character</option>
 										<%
 										for(let char in server.charMap) {
@@ -143,6 +269,7 @@
 						<th>#</th>
 						<th class="d-none d-sm-table-cell">Date</th>
 						<th>Matchup details</th>
+						<th>Map</th>
 						<th>Link</th>
 						<th class="d-none d-md-table-cell">Tags</th>
 						<th class="d-none d-lg-table-cell">Report</th>

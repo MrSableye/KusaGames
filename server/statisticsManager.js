@@ -1,6 +1,21 @@
-const fs = require("fs");
-const Scanner = require("n-readlines");
-const utils = require("./functions/timeUtils.js");
+
+function P1CharList(match) {
+	return [match.p1char1, match.p1char2, match.p1char3, match.p1char4];
+}
+
+function P1HasChar(match, char) {
+	return P1CharList(match)
+		.some((matchChar) => matchChar === char);
+}
+
+function P2CharList(match) {
+	return [match.p2char1, match.p2char2, match.p2char3, match.p2char4];
+}
+
+function P2HasChar(match, char) {
+	return P2CharList(match)
+		.some((matchChar) => matchChar === char);
+}
 
 function StatisticsManager(server) {
 	this.server = server;
@@ -15,7 +30,7 @@ StatisticsManager.prototype.getCharacterPlayerStats = function(char) {
 
 		for(let match of videoData.matches) {
 			let c;
-			if(match.p1name.length > 0 && match.p1char === char) {
+			if(match.p1name.length > 0 && P1HasChar(match, char)) {
 				c = players[match.p1name] || {
 					total: 0,
 					wins: 0,
@@ -31,7 +46,7 @@ StatisticsManager.prototype.getCharacterPlayerStats = function(char) {
 				}
 				c.total++;
 				players[match.p1name] = c;
-			} else if(match.p2name.length > 0 && match.p2char === char) {
+			} else if(match.p2name.length > 0 && P2HasChar(match, char)) {
 				c = players[match.p2name] || {
 					total: 0,
 					wins: 0,
@@ -151,38 +166,47 @@ StatisticsManager.prototype.getCharacterMatchupStats = function(cname) {
 
 		for(let match of videoData.matches) {
 			let c;
-			if(match.p1char === cname) {
-				c = chars[match.p2char] || {
-					total: 0,
-					wins: 0,
-					losses: 0,
-					draws: 0
+			for(let p1char of P1CharList(match)) {
+				if (p1char === cname) {
+					for(let p2char of P2CharList(match)) {
+						c = chars[p2char] || {
+							total: 0,
+							wins: 0,
+							losses: 0,
+							draws: 0
+						}
+						if(match.winner === "1") {
+							c.wins++;
+						} else if(match.winner === "2") {
+							c.losses++;
+						} else {
+							c.draws++;
+						}
+						c.total++;
+						chars[p2char] = c;
+					}
 				}
-				if(match.winner === "1") {
-					c.wins++;
-				} else if(match.winner === "2") {
-					c.losses++;
-				} else {
-					c.draws++;
+			}
+			for(let p2char of P2CharList(match)) {
+				if (p2char === cname) {
+					for(let p1char of P1CharList(match)) {
+						c = chars[p1char] || {
+							total: 0,
+							wins: 0,
+							losses: 0,
+							draws: 0
+						};
+						if(match.winner === "1") {
+							c.losses++;
+						} else if(match.winner === "2") {
+							c.wins++;
+						} else {
+							c.draws++;
+						}
+						c.total++;
+						chars[p1char] = c;
+					}
 				}
-				c.total++;
-				chars[match.p2char] = c;
-			} else if(match.p2char === cname) {
-				c = chars[match.p1char] || {
-					total: 0,
-					wins: 0,
-					losses: 0,
-					draws: 0
-				};
-				if(match.winner === "1") {
-					c.losses++;
-				} else if(match.winner === "2") {
-					c.wins++;
-				} else {
-					c.draws++;
-				}
-				c.total++;
-				chars[match.p1char] = c;
 			}
 		}
 	}
@@ -222,37 +246,41 @@ StatisticsManager.prototype.getPlayerCharacterStats = function(pname) {
 		for(let match of videoData.matches) {
 			let c;
 			if(match.p1name === pname) {
-				c = chars[match.p1char] || {
-					total: 0,
-					wins: 0,
-					losses: 0,
-					draws: 0
-				};
-				if(match.winner === "1") {
-					c.wins++;
-				} else if(match.winner === "2") {
-					c.losses++;
-				} else {
-					c.draws++;
+				for(let p1char of P1CharList(match)) {
+					c = chars[p1char] || {
+						total: 0,
+						wins: 0,
+						losses: 0,
+						draws: 0
+					};
+					if(match.winner === "1") {
+						c.wins++;
+					} else if(match.winner === "2") {
+						c.losses++;
+					} else {
+						c.draws++;
+					}
+					c.total++;
+					chars[p1char] = c;
 				}
-				c.total++;
-				chars[match.p1char] = c;
 			} else if(match.p2name === pname) {
-				c = chars[match.p2char] || {
-					total: 0,
-					wins: 0,
-					losses: 0,
-					draws: 0
-				};
-				if(match.winner === "1") {
-					c.losses++;
-				} else if(match.winner === "2") {
-					c.wins++;
-				} else {
-					c.draws++;
+				for(let p2char of P2CharList(match)) {
+					c = chars[p2char] || {
+						total: 0,
+						wins: 0,
+						losses: 0,
+						draws: 0
+					};
+					if(match.winner === "1") {
+						c.losses++;
+					} else if(match.winner === "2") {
+						c.wins++;
+					} else {
+						c.draws++;
+					}
+					c.total++;
+					chars[p2char] = c;
 				}
-				c.total++;
-				chars[match.p2char] = c;
 			}
 		}
 	}
@@ -324,35 +352,47 @@ StatisticsManager.prototype.getCharacterStats = function() {
 		if(videoData.provIP) continue;
 		
 		for(let match of videoData.matches) {
-			let c1 = chars[match.p1char] || {
-				total: 0,
-				wins: 0,
-				losses: 0,
-				draws: 0
-			};
-			let c2 = chars[match.p2char] || {
-				total: 0,
-				wins: 0,
-				losses: 0,
-				draws: 0
-			};
+			for(let p1char of P1CharList(match)) {
+				let c1 = chars[p1char] || {
+					total: 0,
+					wins: 0,
+					losses: 0,
+					draws: 0
+				};
 
-			if(match.winner === "1") {
-				c1.wins++;
-				c2.losses++;
-			} else if(match.winner === "2") {
-				c1.losses++;
-				c2.wins++;
-			} else {
-				c1.draws++;
-				c2.draws++;
+				if(match.winner === "1") {
+					c1.wins++;
+				} else if(match.winner === "2") {
+					c1.losses++;
+				} else {
+					c1.draws++;
+				}
+
+				c1.total++;
+
+				chars[p1char] = c1;
 			}
 
-			c1.total++;
-			c2.total++;
+			for(let p2char of P2CharList(match)) {
+				let c2 = chars[p2char] || {
+					total: 0,
+					wins: 0,
+					losses: 0,
+					draws: 0
+				};
+	
+				if(match.winner === "1") {
+					c2.losses++;
+				} else if(match.winner === "2") {
+					c2.wins++;
+				} else {
+					c2.draws++;
+				}
 
-			chars[match.p1char] = c1;
-			chars[match.p2char] = c2;
+				c2.total++;
+
+				chars[p2char] = c2;
+			}
 		}
 	}
 

@@ -3,15 +3,30 @@
 	<td class="matchup">
 		<div>
 			<div class="player-1 <%=match.winner==1||match.winner=="D"?'winner':''%>">
-				<img class="d-sm-img" src="img/chars/<%=match.p1char%>.png" data-char="<%=server.charMap[match.p1char].name%>">
+				<div>
+					<img class="d-sm-img char1 char-img" src="img/chars/<%=match.p1char1%>.png" data-char="<%=server.charMap[match.p1char1].name%>">
+					<img class="d-sm-img char2 char-img" src="img/chars/<%=match.p1char2%>.png" data-char="<%=server.charMap[match.p1char2].name%>"><br>
+					<img class="d-sm-img char3 char-img" src="img/chars/<%=match.p1char3%>.png" data-char="<%=server.charMap[match.p1char3].name%>">
+					<img class="d-sm-img char4 char-img" src="img/chars/<%=match.p1char4%>.png" data-char="<%=server.charMap[match.p1char4].name%>">
+				</div>
 				<span><%=match.p1name%></span>
+				<img class="d-sm-img rank-img" src="img/ranks/<%=match.p1rank%>.png" data-rank="<%=server.rankMap[match.p1rank].name%>">
 			</div>
 			<span class="versus"></span>
 			<div class="player-2 <%=match.winner==2||match.winner=="D"?'winner':''%>">
-				<img class="d-sm-img" src="img/chars/<%=match.p2char%>.png" data-char="<%=server.charMap[match.p2char].name%>">
+				<div>
+					<img class="d-sm-img char1 char-img" src="img/chars/<%=match.p2char1%>.png" data-char="<%=server.charMap[match.p2char1].name%>">
+					<img class="d-sm-img char2 char-img" src="img/chars/<%=match.p2char2%>.png" data-char="<%=server.charMap[match.p2char2].name%>"><br>
+					<img class="d-sm-img char3 char-img" src="img/chars/<%=match.p2char3%>.png" data-char="<%=server.charMap[match.p2char3].name%>">
+					<img class="d-sm-img char4 char-img" src="img/chars/<%=match.p2char4%>.png" data-char="<%=server.charMap[match.p2char4].name%>">
+				</div>
 				<span><%=match.p2name%></span>
+				<img class="d-sm-img rank-img" src="img/ranks/<%=match.p2rank%>.png" data-rank="<%=server.rankMap[match.p2rank].name%>">
 			</div>
 		</div>
+	</td>
+	<td>
+		<img class="TODOCLASS" src="img/maps/<%=match.map%>.png" data-map="<%=match.map%>">
 	</td>
 	<td>
 		<a target="_blank" href="https://youtu.be/<%=match.videoData.id%>?t=<%=match.time%>">

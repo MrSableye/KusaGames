@@ -66,7 +66,7 @@
 					How to use:
 					<ol>
 						<li>Load the YouTube video.</li>
-						<li>Populate video details such as date, netplay, appropriate tags.</li>
+						<li>Populate video details such as date, platform, appropriate tags.</li>
 						<li>Match start point is when the characters are able to move. BE PRECISE to the second. It sucks to wait until the match starts when searching matches.</li>
 						<li>Once you get to the match's start point, you MUST refresh the editor time by clicking the "Refresh time" button. This will set the editor time of when the match starts.</li>
 						<li>Populate the match's details. Player characters, and names if possible.</li>
@@ -82,7 +82,7 @@
 						<li>Make sure you pick the right characters.</li>
 						<li>Only add player names when you are sure.</li>
 						<li>Japanese, or any other non-english player names should be written in the form of <kbd class="">romaji (native)</kbd>. There are some japanese names in the DB, see for yourself.</li>
-						<li>If most matches in the video are from netplay, mark it as netplay.</li>
+						<li>If most matches in the video are from a single platform, mark it as that platform.</li>
 						<li>Date of the video is when matches were played (if known). If not known, set it to the video's upload date.</li>
 						<li>Do not include player names or character names in the tags, as those can be specifically searched for.</li>
 						<li>Be careful when using the char+player list. Make sure the character is correct. Some players might use multiple characters.</li>
@@ -125,10 +125,10 @@
 					<div class="ms-form-group">
 						<label><b>VIDEO TYPE</b></label>
 						<span class="select">
-							<select id="NetplaySelect">
-								<option value="">Locals or Netplay?</option>
-								<option value="L">Locals (offline)</option>
-								<option value="N">Netplay</option>
+							<select id="PlatformSelect">
+								<option value="">Arcade or PC?</option>
+								<option value="A">Arcade</option>
+								<option value="PC">PC</option>
 							</select>
 						</span>
 					</div>
@@ -184,7 +184,63 @@
 					<div class="ms-form-group">
 						<label><b>PLAYER 1</b></label>
 						<span class="select">
-							<select id="P1Char">
+							<select id="P1Rank">
+								<option value="">Select rank</option>
+								<%
+								for(let rank in server.rankMap) {
+									%>
+									<option value="<%=rank%>"><%=server.rankMap[rank].name%></option>
+									<%
+								}
+								%>
+							</select>
+						</span>
+					</div>
+					<div class="ms-form-group">
+						<span class="select">
+							<select id="P1Char1">
+								<option value="">Select character</option>
+								<%
+								for(let char in server.charMap) {
+									%>
+									<option value="<%=char%>"><%=server.charMap[char].name%></option>
+									<%
+								}
+								%>
+							</select>
+						</span>
+					</div>
+					<div class="ms-form-group">
+						<span class="select">
+							<select id="P1Char2">
+								<option value="">Select character</option>
+								<%
+								for(let char in server.charMap) {
+									%>
+									<option value="<%=char%>"><%=server.charMap[char].name%></option>
+									<%
+								}
+								%>
+							</select>
+						</span>
+					</div>
+					<div class="ms-form-group">
+						<span class="select">
+							<select id="P1Char3">
+								<option value="">Select character</option>
+								<%
+								for(let char in server.charMap) {
+									%>
+									<option value="<%=char%>"><%=server.charMap[char].name%></option>
+									<%
+								}
+								%>
+							</select>
+						</span>
+					</div>
+					<div class="ms-form-group">
+						<span class="select">
+							<select id="P1Char4">
 								<option value="">Select character</option>
 								<%
 								for(let char in server.charMap) {
@@ -211,7 +267,63 @@
 					<div class="ms-form-group">
 						<label><b>PLAYER 2</b></label>
 						<span class="select">
-							<select id="P2Char">
+							<select id="P2Rank">
+								<option value="">Select rank</option>
+								<%
+								for(let rank in server.rankMap) {
+									%>
+									<option value="<%=rank%>"><%=server.rankMap[rank].name%></option>
+									<%
+								}
+								%>
+							</select>
+						</span>
+					</div>
+					<div class="ms-form-group">
+						<span class="select">
+							<select id="P2Char1">
+								<option value="">Select character</option>
+								<%
+								for(let char in server.charMap) {
+									%>
+									<option value="<%=char%>"><%=server.charMap[char].name%></option>
+									<%
+								}
+								%>
+							</select>
+						</span>
+					</div>
+					<div class="ms-form-group">
+						<span class="select">
+							<select id="P2Char2">
+								<option value="">Select character</option>
+								<%
+								for(let char in server.charMap) {
+									%>
+									<option value="<%=char%>"><%=server.charMap[char].name%></option>
+									<%
+								}
+								%>
+							</select>
+						</span>
+					</div>
+					<div class="ms-form-group">
+						<span class="select">
+							<select id="P2Char3">
+								<option value="">Select character</option>
+								<%
+								for(let char in server.charMap) {
+									%>
+									<option value="<%=char%>"><%=server.charMap[char].name%></option>
+									<%
+								}
+								%>
+							</select>
+						</span>
+					</div>
+					<div class="ms-form-group">
+						<span class="select">
+							<select id="P2Char4">
 								<option value="">Select character</option>
 								<%
 								for(let char in server.charMap) {
@@ -236,7 +348,21 @@
 				</div>
 				<div class="col-sm">
 					<div class="ms-form-group">
-						<label><b>RESULT</b></label>
+						<label><b>MATCH DETAILS</b></label>
+						<span class="select">
+							<select id="MapSelect">
+								<option value="">Select map</option>
+								<%
+								for(let map in server.mapMap) {
+									%>
+									<option value="<%=map%>"><%=server.mapMap[map].name%></option>
+									<%
+								}
+								%>
+							</select>
+						</span>
+					</div>
+					<div class="ms-form-group">
 						<span class="select">
 							<select id="WinnerSelect">
 								<option value="">Select winner</option>
