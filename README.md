@@ -1,7 +1,5 @@
-# KusaGames
-A base website suite for gaming match database.\
-Designed for 1v1 matches, but you could fork and amend it for any competition.\
-KusaGames in action: http://mbaacc.melty.games/ and http://lumina.melty.games/
+# KusaGames: Bombergirl Edition
+A modification of [KusaGames](https://github.com/EikaMikiku/KusaGames) for Bombergirl.
 
 ## How to run
 
@@ -40,15 +38,11 @@ For example:
        These are 80x100 images used in the search result list and editor match list.
     1. In `site\img\chars\big` full sized character images should be added.\
        They show up as background in the characters page. Name should match the id.
-3. Amend `server\templates\characters.html` to use your characters.\
-   What you are looking for here is `.char-select` div.\
-   Make sure the img's src attribute has your character's id.\
-   Also data-id attribute should be your character's id.
-5. Create logos for each character in site\img\logos.
+3. Create logos for each character in site\img\logos.
     1. Logos are 220x56 images. Each character should have their logo.\
         Server randomly shows them each refresh.
     1. Name is important: `logo_{{character id}}.png`.
-5. Clean contents of `data\match.data`. These are not for your game (Don't delete the file though).
+4. Clean contents of `data\match.data`. These are not for your game (Don't delete the file though).
 
 And that's it. You can run this, and it shouldn't break. If problems, check FAQ in the website on how to contact Eika.\
 However, at this point you will not have any matches yet of your game.
