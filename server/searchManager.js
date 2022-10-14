@@ -4,13 +4,19 @@ const DEFAULT_SEARCH = {
 	p1char2: "",
 	p1char3: "",
 	p1char4: "",
-	p1name: "",
+	p1name1: "",
+	p1name2: "",
+	p1name3: "",
+	p1name4: "",
 	p1rank: "",
 	p2char1: "",
 	p2char2: "",
 	p2char3: "",
 	p2char4: "",
-	p2name: "",
+	p2name1: "",
+	p2name2: "",
+	p2name3: "",
+	p2name4: "",
 	p2rank: "",
 	map: "",
 	winner: "",
@@ -28,13 +34,19 @@ SearchManager.prototype.search = function(data, form) {
 		p1char2: form.p1char2 || DEFAULT_SEARCH.p1char2,
 		p1char3: form.p1char3 || DEFAULT_SEARCH.p1char3,
 		p1char4: form.p1char4 || DEFAULT_SEARCH.p1char4,
-		p1name: form.p1name || DEFAULT_SEARCH.p1name,
+		p1name1: form.p1name1 || DEFAULT_SEARCH.p1name1,
+		p1name2: form.p1name2 || DEFAULT_SEARCH.p1name2,
+		p1name3: form.p1name3 || DEFAULT_SEARCH.p1name3,
+		p1name4: form.p1name4 || DEFAULT_SEARCH.p1name4,
 		p1rank: form.p1rank || DEFAULT_SEARCH.p1rank,
 		p2char1: form.p2char1 || DEFAULT_SEARCH.p2char1,
 		p2char2: form.p2char2 || DEFAULT_SEARCH.p2char2,
 		p2char3: form.p2char3 || DEFAULT_SEARCH.p2char3,
 		p2char4: form.p2char4 || DEFAULT_SEARCH.p2char4,
-		p2name: form.p2name || DEFAULT_SEARCH.p2name,
+		p2name1: form.p2name1 || DEFAULT_SEARCH.p2name1,
+		p2name2: form.p2name2 || DEFAULT_SEARCH.p2name2,
+		p2name3: form.p2name3 || DEFAULT_SEARCH.p2name3,
+		p2name4: form.p2name4 || DEFAULT_SEARCH.p2name4,
 		p2rank: form.p2rank || DEFAULT_SEARCH.p2rank,
 		map: form.map || DEFAULT_SEARCH.map,
 		winner: form.winner || DEFAULT_SEARCH.winner,
@@ -101,13 +113,17 @@ SearchManager.prototype.search = function(data, form) {
 };
 
 function matchTest(mData, sq) {
-	let p1charset = charFrequencySet([mData.p1char1, mData.p1char2, mData.p1char3, mData.p1char4]);
-	let p1set = Object.keys(p1charset).length || sq.p1name.length || sq.p1rank.length;
-	let p2charset = charFrequencySet([mData.p2char1, mData.p2char2, mData.p2char3, mData.p2char4]);
-	let p2set = Object.keys(p2charset).length || sq.p2name.length || sq.p2rank.length;
+	let p1charset = frequencySet([mData.p1char1, mData.p1char2, mData.p1char3, mData.p1char4]);
+	let p1nameset = frequencySet([mData.p1name1, mData.p1name2, mData.p1name3, mData.p1name4])
+	let p1set = Object.keys(p1charset).length || Object.keys(p1nameset).length || sq.p1rank.length;
+	let p2charset = frequencySet([mData.p2char1, mData.p2char2, mData.p2char3, mData.p2char4]);
+	let p2nameset = frequencySet([mData.p2name1, mData.p2name2, mData.p2name3, mData.p2name4])
+	let p2set = Object.keys(p2charset).length || Object.keys(p2nameset).length || sq.p2rank.length;
 
-	let p1sqchars = charFrequencySet([sq.p1char1, sq.p1char2, sq.p1char3, sq.p1char4]);
-	let p2sqchars = charFrequencySet([sq.p2char1, sq.p2char2, sq.p2char3, sq.p2char4]);
+	let p1sqchars = frequencySet([sq.p1char1, sq.p1char2, sq.p1char3, sq.p1char4]);
+	let p1sqnames = frequencySet([sq.p1name1, sq.p1name2, sq.p1name3, sq.p1name4]);
+	let p2sqchars = frequencySet([sq.p2char1, sq.p2char2, sq.p2char3, sq.p2char4]);
+	let p2sqnames = frequencySet([sq.p2name1, sq.p2name2, sq.p2name3, sq.p2name4]);
 
 	if (sq.map.length > 0) {
 		if (sq.map !== mData.map) {
@@ -117,16 +133,16 @@ function matchTest(mData, sq) {
 
 	if(p1set) {
 		if(p2set) {
-			let p1 = playerMatches(p1charset, mData.p1name, mData.p1rank, p1sqchars, sq.p1name, sq.p1rank);
-			let p2 = playerMatches(p2charset, mData.p2name, mData.p2rank, p2sqchars, sq.p2name, sq.p2rank);
+			let p1 = playerMatches(p1charset, p1nameset, mData.p1rank, p1sqchars, p1sqnames, sq.p1rank);
+			let p2 = playerMatches(p2charset, p2nameset, mData.p2rank, p2sqchars, p2sqnames, sq.p2rank);
 			//Swapped:
-			let p1asp2 = playerMatches(p2charset, mData.p2name, mData.p2rank, p1sqchars, sq.p1name, sq.p1rank);
-			let p2asp1 = playerMatches(p1charset, mData.p1name, mData.p1rank, p2sqchars, sq.p2name, sq.p2rank);
+			let p1asp2 = playerMatches(p2charset, p2nameset, mData.p2rank, p1sqchars, p1sqnames, sq.p1rank);
+			let p2asp1 = playerMatches(p1charset, p1nameset, mData.p1rank, p2sqchars, p2sqnames, sq.p2rank);
 
 			if(p1 && p2) {
 				//Normal match
-				let p1Char = charFrequencySetToKey(p1sqchars) + sq.p1name + sq.p1rank;
-				let p2Char = charFrequencySetToKey(p2sqchars) + sq.p2name + sq.p2rank;
+				let p1Char = frequencySetToKey(p1sqchars) + frequencySetToKey(p1sqnames) + sq.p1rank;
+				let p2Char = frequencySetToKey(p2sqchars) + frequencySetToKey(p2sqnames) + sq.p2rank;
 				if(p1Char !== p2Char) {
 					//Characters are different, so sq.winner is important
 					if(sq.winner === "1" && mData.winner !== "1") {
@@ -143,8 +159,8 @@ function matchTest(mData, sq) {
 				}
 			} else if(p1asp2 && p2asp1) {
 				//Swapped match
-				let p1Char = charFrequencySetToKey(p1sqchars) + sq.p1name + sq.p1rank;
-				let p2Char = charFrequencySetToKey(p2sqchars) + sq.p2name + sq.p2rank;
+				let p1Char = frequencySetToKey(p1sqchars) + frequencySetToKey(p1sqnames) + sq.p1rank;
+				let p2Char = frequencySetToKey(p2sqchars) + frequencySetToKey(p2sqnames) + sq.p2rank;
 				if(p1Char !== p2Char) {
 					//Characters are different, so sq.winner is important
 					if(sq.winner === "1" && mData.winner !== "2") {
@@ -165,8 +181,8 @@ function matchTest(mData, sq) {
 			}
 		} else {
 			//Only p1 search
-			let p1 = playerMatches(p1charset, mData.p1name, mData.p1rank, p1sqchars, sq.p1name, sq.p1rank);
-			let p1asp2 = playerMatches(p2charset, mData.p2name, mData.p2rank, p1sqchars, sq.p1name, sq.p1rank);
+			let p1 = playerMatches(p1charset, p1nameset, mData.p1rank, p1sqchars, p1sqnames, sq.p1rank);
+			let p1asp2 = playerMatches(p2charset, p2nameset, mData.p2rank, p1sqchars, p1sqnames, sq.p1rank);
 			if(p1) {
 				//Winner check
 				if(sq.winner === "1" && mData.winner !== "1") {
@@ -199,8 +215,8 @@ function matchTest(mData, sq) {
 	} else if(p2set) {
 		//Reverse search
 		//Only p2 search
-		let p2 = playerMatches(p2charset, mData.p2name, mData.p2rank, p2sqchars, sq.p2name, sq.p2rank);
-		let p2asp1 = playerMatches(p1charset, mData.p1name, mData.p1rank, p2sqchars, sq.p2name, sq.p2rank);
+		let p2 = playerMatches(p2charset, p2nameset, mData.p2rank, p2sqchars, p2sqnames, sq.p2rank);
+		let p2asp1 = playerMatches(p1charset, p1nameset, mData.p1rank, p2sqchars, p2sqnames, sq.p2rank);
 		if(p2) {
 			//Winner check
 			if(sq.winner === "1" && mData.winner !== "1") {
@@ -245,7 +261,7 @@ function matchTest(mData, sq) {
 	return true;
 }
 
-function playerMatches(mCharSet, mName, mRank, sqCharSet, sqName, sqRank) {
+function playerMatches(mCharSet, mNameSet, mRank, sqCharSet, sqNameSet, sqRank) {
 	//Player character check
 	for(let sqChar of Object.keys(sqCharSet)) {
 		if (!sqChar.length) continue;
@@ -258,11 +274,16 @@ function playerMatches(mCharSet, mName, mRank, sqCharSet, sqName, sqRank) {
 	}
 
 	//Player name check
-	if(sqName.length > 0) {
-		if(mName.toLowerCase() !== sqName.toLowerCase()) {
+	for(let sqName of Object.keys(sqNameSet)) {
+		if (!sqName.length) continue;
+		let sqNameFreq = sqNameSet[sqName] || 0;
+		let mNameFreq = mNameSet[sqName] || 0;
+
+		if (mNameFreq < sqNameFreq) {
 			return false;
 		}
 	}
+
 	//Player rank check
 	if(sqRank.length > 0) {
 		if(sqRank !== mRank) {
@@ -273,22 +294,22 @@ function playerMatches(mCharSet, mName, mRank, sqCharSet, sqName, sqRank) {
 	return true;
 }
 
-function charFrequencySet(chars) {
-	let charFrequencySet = {};
-	chars.forEach((char) => {
-		charFrequencySet[char] = (charFrequencySet[char] || 0) + 1;
+function frequencySet(items) {
+	let frequencySet = {};
+	items.forEach((items) => {
+		frequencySet[items] = (frequencySet[items] || 0) + 1;
 	});
-	return charFrequencySet;
+	return frequencySet;
 }
 
-function charFrequencySetToKey(charFreqSet) {
-	let chars = [];
-	for(let char of Object.keys(charFreqSet)) {
-		for(let i = 0; i < charFreqSet[char]; i++) {
-			chars.push(char);
+function frequencySetToKey(freqSet) {
+	let items = [];
+	for(let item of Object.keys(freqSet)) {
+		for(let i = 0; i < freqSet[item]; i++) {
+			items.push(item);
 		}
 	}
-	return chars.sort().join(':');
+	return items.sort().join(':');
 }
 
 module.exports = SearchManager;

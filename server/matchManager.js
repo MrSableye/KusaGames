@@ -115,13 +115,19 @@ MatchManger.prototype.addMatch = function(form, ip, auth) {
 		"p1char2": form.p1char2,
 		"p1char3": form.p1char3,
 		"p1char4": form.p1char4,
-		"p1name": form.p1name,
+		"p1name1": form.p1name1,
+		"p1name2": form.p1name2,
+		"p1name3": form.p1name3,
+		"p1name4": form.p1name4,
 		"p1rank": form.p1rank,
 		"p2char1": form.p2char1,
 		"p2char2": form.p2char2,
 		"p2char3": form.p2char3,
 		"p2char4": form.p2char4,
-		"p2name": form.p2name,
+		"p2name1": form.p2name1,
+		"p2name2": form.p2name2,
+		"p2name3": form.p2name3,
+		"p2name4": form.p2name4,
 		"p2rank": form.p2rank,
 		"map": form.map,
 		"winner": form.winner
@@ -141,8 +147,8 @@ MatchManger.prototype.addMatch = function(form, ip, auth) {
 	let log = `Added ${auth ? "" : "provisional "}match\t`;
 	log += `VideoID: ${form.vid}\t`;
 	log += `Time: ${form.readableTime}\t`;
-	log += `P1: [${form.p1char1}, ${form.p1char2}, ${form.p1char3}, ${form.p1char4}] ${form.p1name} ${form.p1rank}\t`;
-	log += `P2: [${form.p2char1}, ${form.p2char2}, ${form.p2char3}, ${form.p2char4}] ${form.p2name} ${form.p2rank}\t`;
+	log += `P1: [${form.p1char1}, ${form.p1char2}, ${form.p1char3}, ${form.p1char4}] [${form.p1name1}, ${form.p1name2}, ${form.p1name3}, ${form.p1name4}] ${form.p1rank}\t`;
+	log += `P2: [${form.p2char1}, ${form.p2char2}, ${form.p2char3}, ${form.p2char4}] [${form.p2name1}, ${form.p2name2}, ${form.p2name3}, ${form.p2name4}] ${form.p2rank}\t`;
 	log += `Map: ${form.map}\t`;
 	log += `Winner: ${form.winner}.`;
 	this.server.logger.log(log, ip, auth);
@@ -193,9 +199,21 @@ MatchManger.prototype.editMatch = function(form, ip, auth) {
 		log += `P1 Char 4 from: ${match.p1char4} to ${form.p1char4}\t`;
 		match.p1char4 = form.p1char4;
 	}
-	if(match.p1name !== form.p1name) {
-		log += `P1 Name from: ${match.p1name} to ${form.p1name}\t`;
-		match.p1name = form.p1name;
+	if(match.p1name1 !== form.p1name1) {
+		log += `P1 Name 1 from: ${match.p1name1} to ${form.p1name1}\t`;
+		match.p1name1 = form.p1name1;
+	}
+	if(match.p1name2 !== form.p1name2) {
+		log += `P1 Name 2 from: ${match.p1name2} to ${form.p1name2}\t`;
+		match.p1name2 = form.p1name2;
+	}
+	if(match.p1name3 !== form.p1name3) {
+		log += `P1 Name 3 from: ${match.p1name3} to ${form.p1name3}\t`;
+		match.p1name3 = form.p1name3;
+	}
+	if(match.p1name4 !== form.p1name4) {
+		log += `P1 Name 4 from: ${match.p1name4} to ${form.p1name4}\t`;
+		match.p1name4 = form.p1name4;
 	}
 	if(match.p1rank !== form.p1rank) {
 		log += `P1 Rank from: ${match.p1rank} to ${form.p1rank}\t`;
@@ -217,9 +235,21 @@ MatchManger.prototype.editMatch = function(form, ip, auth) {
 		log += `P2 Char 4 from: ${match.p2char4} to ${form.p2char4}\t`;
 		match.p2char4 = form.p2char4;
 	}
-	if(match.p2name !== form.p2name) {
-		log += `P2 Name from: ${match.p2name} to ${form.p2name}\t`;
-		match.p2name = form.p2name;
+	if(match.p2name1 !== form.p2name1) {
+		log += `P2 Name 1 from: ${match.p2name1} to ${form.p2name1}\t`;
+		match.p2name1 = form.p2name1;
+	}
+	if(match.p2name2 !== form.p2name2) {
+		log += `P2 Name 2 from: ${match.p2name2} to ${form.p2name2}\t`;
+		match.p2name2 = form.p2name2;
+	}
+	if(match.p2name3 !== form.p2name3) {
+		log += `P2 Name 3 from: ${match.p2name3} to ${form.p2name3}\t`;
+		match.p2name3 = form.p2name3;
+	}
+	if(match.p2name4 !== form.p2name4) {
+		log += `P2 Name 4 from: ${match.p2name4} to ${form.p2name4}\t`;
+		match.p2name4 = form.p2name4;
 	}
 	if(match.p2rank !== form.p2rank) {
 		log += `P2 Rank from: ${match.p2rank} to ${form.p2rank}\t`;
@@ -298,8 +328,8 @@ MatchManger.prototype.deleteMatch = function(form, ip, auth) {
 			let log = `Deleted ${auth ? "" : "provisional "}match\t`;
 			log += `VideoID: ${form.vid}\t`;
 			log += `Time: ${m.time}\t`;
-			log += `P1: [${m.p1char1}, ${m.p1char2}, ${m.p1char3}, ${m.p1char4}] ${m.p1name} ${m.p1rank}\t`;
-			log += `P2: [${m.p2char1}, ${m.p2char2}, ${m.p2char3}, ${m.p2char4}] ${m.p2name} ${m.p2rank}\t`;
+			log += `P1: [${m.p1char1}, ${m.p1char2}, ${m.p1char3}, ${m.p1char4}] [${m.p1name1}, ${m.p1name2}, ${m.p1name3}, ${m.p1name4}] ${m.p1rank}\t`;
+			log += `P2: [${m.p2char1}, ${m.p2char2}, ${m.p2char3}, ${m.p2char4}] [${m.p2name1}, ${m.p2name2}, ${m.p2name3}, ${m.p2name4}] ${m.p2rank}\t`;
 			log += `Map: ${m.map}\t`;
 			log += `Winner: ${m.winner}.`;
 			this.server.logger.log(log, ip, auth);
@@ -409,11 +439,29 @@ MatchManger.prototype.validateAddEditMatchForm = function(form, skipCloseTimeChe
 		}
 	}
 
-	if(!form.p1name) {
-		form.p1name = "";
+	if(!form.p1name1) {
+		form.p1name1 = "";
 	}
-	if(!form.p2name) {
-		form.p2name = "";
+	if(!form.p1name2) {
+		form.p1name2 = "";
+	}
+	if(!form.p1name3) {
+		form.p1name3 = "";
+	}
+	if(!form.p1name4) {
+		form.p1name4 = "";
+	}
+	if(!form.p2name1) {
+		form.p2name1 = "";
+	}
+	if(!form.p2name2) {
+		form.p2name2 = "";
+	}
+	if(!form.p2name3) {
+		form.p2name3 = "";
+	}
+	if(!form.p2name4) {
+		form.p2name4 = "";
 	}
 
 	return null;

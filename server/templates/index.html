@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 	<%=server.templateManager.renderTemplate("head.html", {
-		title: "Kusa.Games: Landing page",
+		title: "BG Replays: Landing page",
 		description: "Page to search for matches."
 	})%>
 	<script defer src="js/index.js"></script>
@@ -14,15 +14,15 @@
 		<div class="container">
 			<div class="ms-content">
 				<hgroup class="ms-text-center py-4">
-					<h2 class="shadow">Welcome to Kusa.Games!</h1>
-					<h5 class="shadow">A place where you can search and add Kusa games!</h5>
+					<h2 class="shadow">Welcome to BG Replays!</h1>
+					<h5 class="shadow">A place where you can search and add Bombergirl games!</h5>
 				</hgroup>
 				<form method="GET" id="form">
 					<input type="hidden" id="page" name="page" value="1">
 					<div class="row">
 						<div class="col-sm">
 							<div class="ms-form-group">
-								<label><b>PLAYER 1</b></label>
+								<label><b>TEAM 1</b></label>
 								<span class="select">
 									<select id="p1rank" name="p1rank">
 										<option value="">Select rank</option>
@@ -39,7 +39,7 @@
 							<div class="ms-form-group">
 								<span class="select">
 									<select id="p1char1" name="p1char1">
-										<option value="">Select character</option>
+										<option value="">Select player 1 character</option>
 										<%
 										for(let char in server.charMap) {
 											%>
@@ -49,11 +49,21 @@
 										%>
 									</select>
 								</span>
+							</div>
+							<div class="ms-form-group">
+								<input id="p1name1" name="p1name1" placeholder="Player 1 name" list="p1name1-list">
+								<datalist id="p1name1-list">
+									<%
+										for(let name of playerNames) {
+											print("<option value='" + name + "'>");
+										}
+									%>
+								</datalist>
 							</div>
 							<div class="ms-form-group">
 								<span class="select">
 									<select id="p1char2" name="p1char2">
-										<option value="">Select character</option>
+										<option value="">Select player 2 character</option>
 										<%
 										for(let char in server.charMap) {
 											%>
@@ -63,11 +73,21 @@
 										%>
 									</select>
 								</span>
+							</div>
+							<div class="ms-form-group">
+								<input id="p1name2" name="p1name2" placeholder="Player 2 name" list="p1name2-list">
+								<datalist id="p1name2-list">
+									<%
+										for(let name of playerNames) {
+											print("<option value='" + name + "'>");
+										}
+									%>
+								</datalist>
 							</div>
 							<div class="ms-form-group">
 								<span class="select">
 									<select id="p1char3" name="p1char3">
-										<option value="">Select character</option>
+										<option value="">Select player 3 character</option>
 										<%
 										for(let char in server.charMap) {
 											%>
@@ -77,11 +97,21 @@
 										%>
 									</select>
 								</span>
+							</div>
+							<div class="ms-form-group">
+								<input id="p1name3" name="p1name3" placeholder="Player 3 name" list="p1name3-list">
+								<datalist id="p1name3-list">
+									<%
+										for(let name of playerNames) {
+											print("<option value='" + name + "'>");
+										}
+									%>
+								</datalist>
 							</div>
 							<div class="ms-form-group">
 								<span class="select">
 									<select id="p1char4" name="p1char4">
-										<option value="">Select character</option>
+										<option value="">Select player 4 character</option>
 										<%
 										for(let char in server.charMap) {
 											%>
@@ -93,8 +123,8 @@
 								</span>
 							</div>
 							<div class="ms-form-group">
-								<input id="p1name" name="p1name" placeholder="Player name" list="p1name-list">
-								<datalist id="p1name-list">
+								<input id="p1name4" name="p1name4" placeholder="Player 4 name" list="p1name4-list">
+								<datalist id="p1name4-list">
 									<%
 										for(let name of playerNames) {
 											print("<option value='" + name + "'>");
@@ -141,7 +171,7 @@
 						</div>
 						<div class="col-sm">
 							<div class="ms-form-group">
-								<label><b>PLAYER 2</b></label>
+								<label><b>TEAM 2</b></label>
 								<span class="select">
 									<select id="p2rank" name="p2rank">
 										<option value="">Select rank</option>
@@ -158,7 +188,7 @@
 							<div class="ms-form-group">
 								<span class="select">
 									<select id="p2char1" name="p2char1">
-										<option value="">Select character</option>
+										<option value="">Select player 1 character</option>
 										<%
 										for(let char in server.charMap) {
 											%>
@@ -168,11 +198,21 @@
 										%>
 									</select>
 								</span>
+							</div>
+							<div class="ms-form-group">
+								<input id="p2name1" name="p1name1" placeholder="Player 1 name" list="p1name1-list">
+								<datalist id="p1name1-list">
+									<%
+										for(let name of playerNames) {
+											print("<option value='" + name + "'>");
+										}
+									%>
+								</datalist>
 							</div>
 							<div class="ms-form-group">
 								<span class="select">
 									<select id="p2char2" name="p2char2">
-										<option value="">Select character</option>
+										<option value="">Select player 2 character</option>
 										<%
 										for(let char in server.charMap) {
 											%>
@@ -182,11 +222,21 @@
 										%>
 									</select>
 								</span>
+							</div>
+							<div class="ms-form-group">
+								<input id="p2name2" name="p1name2" placeholder="Player 2 name" list="p1name2-list">
+								<datalist id="p1name2-list">
+									<%
+										for(let name of playerNames) {
+											print("<option value='" + name + "'>");
+										}
+									%>
+								</datalist>
 							</div>
 							<div class="ms-form-group">
 								<span class="select">
 									<select id="p2char3" name="p2char3">
-										<option value="">Select character</option>
+										<option value="">Select player 3 character</option>
 										<%
 										for(let char in server.charMap) {
 											%>
@@ -196,11 +246,21 @@
 										%>
 									</select>
 								</span>
+							</div>
+							<div class="ms-form-group">
+								<input id="p2name3" name="p1name3" placeholder="Player 3 name" list="p1name3-list">
+								<datalist id="p1name3-list">
+									<%
+										for(let name of playerNames) {
+											print("<option value='" + name + "'>");
+										}
+									%>
+								</datalist>
 							</div>
 							<div class="ms-form-group">
 								<span class="select">
 									<select id="p2char4" name="p2char4">
-										<option value="">Select character</option>
+										<option value="">Select player 4 character</option>
 										<%
 										for(let char in server.charMap) {
 											%>
@@ -212,8 +272,8 @@
 								</span>
 							</div>
 							<div class="ms-form-group">
-								<input id="p2name" name="p2name" placeholder="Player name" list="p2name-list">
-								<datalist id="p2name-list">
+								<input id="p2name4" name="p1name4" placeholder="Player 4 name" list="p1name4-list">
+								<datalist id="p1name4-list">
 									<%
 										for(let name of playerNames) {
 											print("<option value='" + name + "'>");

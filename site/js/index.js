@@ -5,7 +5,10 @@ document.addEventListener("DOMContentLoaded", () => {
 	let p1char2 = document.getElementById("p1char2");
 	let p1char3 = document.getElementById("p1char3");
 	let p1char4 = document.getElementById("p1char4");
-	let p1name = document.getElementById("p1name");
+	let p1name1 = document.getElementById("p1name1");
+	let p1name2 = document.getElementById("p1name2");
+	let p1name3 = document.getElementById("p1name3");
+	let p1name4 = document.getElementById("p1name4");
 	let p1rank = document.getElementById("p1rank");
 	let platform = document.getElementById("platform");
 	let map = document.getElementById("map");
@@ -14,7 +17,10 @@ document.addEventListener("DOMContentLoaded", () => {
 	let p2char2 = document.getElementById("p2char2");
 	let p2char3 = document.getElementById("p2char3");
 	let p2char4 = document.getElementById("p2char4");
-	let p2name = document.getElementById("p2name");
+	let p2name1 = document.getElementById("p2name1");
+	let p2name2 = document.getElementById("p2name2");
+	let p2name3 = document.getElementById("p2name3");
+	let p2name4 = document.getElementById("p2name4");
 	let p2rank = document.getElementById("p2rank");
 	let videoId = document.getElementById("videoId");
 	let videoTag = document.getElementById("videoTag");
@@ -30,8 +36,14 @@ document.addEventListener("DOMContentLoaded", () => {
 	p1char3.name = "";
 	p1char4.dataset.name = p1char4.name;
 	p1char4.name = "";
-	p1name.dataset.name = p1name.name;
-	p1name.name = "";
+	p1name1.dataset.name = p1name1.name;
+	p1name1.name = "";
+	p1name2.dataset.name = p1name2.name;
+	p1name2.name = "";
+	p1name3.dataset.name = p1name3.name;
+	p1name3.name = "";
+	p1name4.dataset.name = p1name4.name;
+	p1name4.name = "";
 	p1rank.dataset.name = p1rank.name;
 	p1rank.name = "";
 	platform.dataset.name = platform.name;
@@ -48,8 +60,14 @@ document.addEventListener("DOMContentLoaded", () => {
 	p2char3.name = "";
 	p2char4.dataset.name = p2char4.name;
 	p2char4.name = "";
-	p2name.dataset.name = p2name.name;
-	p2name.name = "";
+	p2name1.dataset.name = p2name1.name;
+	p2name1.name = "";
+	p2name2.dataset.name = p2name2.name;
+	p2name2.name = "";
+	p2name3.dataset.name = p2name3.name;
+	p2name3.name = "";
+	p2name4.dataset.name = p2name4.name;
+	p2name4.name = "";
 	p2rank.dataset.name = p2rank.name;
 	p2rank.name = "";
 	videoId.dataset.name = videoId.name;
@@ -61,7 +79,10 @@ document.addEventListener("DOMContentLoaded", () => {
 	p1char2.onchange = onFormChange;
 	p1char3.onchange = onFormChange;
 	p1char4.onchange = onFormChange;
-	p1name.onchange = onFormChange;
+	p1name1.onchange = onFormChange;
+	p1name2.onchange = onFormChange;
+	p1name3.onchange = onFormChange;
+	p1name4.onchange = onFormChange;
 	p1rank.onchange = onFormChange;
 	platform.onchange = onFormChange;
 	map.onchange = onFormChange;
@@ -70,7 +91,10 @@ document.addEventListener("DOMContentLoaded", () => {
 	p2char2.onchange = onFormChange;
 	p2char3.onchange = onFormChange;
 	p2char4.onchange = onFormChange;
-	p2name.onchange = onFormChange;
+	p2name1.onchange = onFormChange;
+	p2name2.onchange = onFormChange;
+	p2name3.onchange = onFormChange;
+	p2name4.onchange = onFormChange;
 	p2rank.onchange = onFormChange;
 	videoId.onchange = onFormChange;
 	videoTag.onchange = onFormChange;
@@ -82,7 +106,10 @@ document.addEventListener("DOMContentLoaded", () => {
 	p1char2.value = url.get("p1char2")||"";
 	p1char3.value = url.get("p1char3")||"";
 	p1char4.value = url.get("p1char4")||"";
-	p1name.value = url.get("p1name")||"";
+	p1name1.value = url.get("p1name1")||"";
+	p1name2.value = url.get("p1name2")||"";
+	p1name3.value = url.get("p1name3")||"";
+	p1name4.value = url.get("p1name4")||"";
 	p1rank.value = url.get("p1rank")||"";
 	platform.value = url.get("platform")||"";
 	map.value = url.get("map")||"";
@@ -91,7 +118,10 @@ document.addEventListener("DOMContentLoaded", () => {
 	p2char2.value = url.get("p2char2")||"";
 	p2char3.value = url.get("p2char3")||"";
 	p2char4.value = url.get("p2char4")||"";
-	p2name.value = url.get("p2name")||"";
+	p2name1.value = url.get("p2name1")||"";
+	p2name2.value = url.get("p2name2")||"";
+	p2name3.value = url.get("p2name3")||"";
+	p2name4.value = url.get("p2name4")||"";
 	p2rank.value = url.get("p2rank")||"";
 	videoTag.value = url.get("tag")||"";
 	videoId.value = url.get("vid")||"";
@@ -160,9 +190,21 @@ document.addEventListener("DOMContentLoaded", () => {
 			hasValue = true;
 			p1char4.name = p1char4.dataset.name;
 		}
-		if(p1name.value.length > 0) {
+		if(p1name1.value.length > 0) {
 			hasValue = true;
-			p1name.name = p1name.dataset.name;
+			p1name1.name = p1name1.dataset.name;
+		}
+		if(p1name2.value.length > 0) {
+			hasValue = true;
+			p1name2.name = p1name2.dataset.name;
+		}
+		if(p1name3.value.length > 0) {
+			hasValue = true;
+			p1name3.name = p1name3.dataset.name;
+		}
+		if(p1name4.value.length > 0) {
+			hasValue = true;
+			p1name4.name = p1name4.dataset.name;
 		}
 		if(p1rank.value.length > 0) {
 			hasValue = true;
@@ -196,9 +238,21 @@ document.addEventListener("DOMContentLoaded", () => {
 			hasValue = true;
 			p2char4.name = p2char4.dataset.name;
 		}
-		if(p2name.value.length > 0) {
+		if(p2name1.value.length > 0) {
 			hasValue = true;
-			p2name.name = p2name.dataset.name;
+			p2name1.name = p2name1.dataset.name;
+		}
+		if(p2name2.value.length > 0) {
+			hasValue = true;
+			p2name2.name = p2name2.dataset.name;
+		}
+		if(p2name3.value.length > 0) {
+			hasValue = true;
+			p2name3.name = p2name3.dataset.name;
+		}
+		if(p2name4.value.length > 0) {
+			hasValue = true;
+			p2name4.name = p2name4.dataset.name;
 		}
 		if(p2rank.value.length > 0) {
 			hasValue = true;

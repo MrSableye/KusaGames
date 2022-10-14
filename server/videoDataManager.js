@@ -47,16 +47,22 @@ VideoDataManager.prototype.getJSON = function() {
 				"p1char2": split[2],
 				"p1char3": split[3],
 				"p1char4": split[4],
-				"p1name": split[5],
-				"p1rank": split[6],
-				"p2char1": split[7],
-				"p2char2": split[8],
-				"p2char3": split[9],
-				"p2char4": split[10],
-				"p2name": split[11],
-				"p2rank": split[12],
-				"map": split[13],
-				"winner": split[14],
+				"p1name1": split[5],
+				"p1name2": split[6],
+				"p1name3": split[7],
+				"p1name4": split[8],
+				"p1rank": split[9],
+				"p2char1": split[10],
+				"p2char2": split[11],
+				"p2char3": split[12],
+				"p2char4": split[13],
+				"p2name1": split[14],
+				"p2name2": split[15],
+				"p2name3": split[16],
+				"p2name4": split[17],
+				"p2rank": split[18],
+				"map": split[19],
+				"winner": split[20],
 				"videoData": output[currentVideoId] // Circular
 			});
 		}
@@ -88,8 +94,8 @@ VideoDataManager.prototype.saveData = function(json) {
 		});
 
 		data.matches.forEach(m => {
-			str += `${m.time}\t${m.p1char1}\t${m.p1char2}\t${m.p1char3}\t${m.p1char4}\t${m.p1name}\t${m.p1rank}\t`;
-			str += `${m.p2char1}\t${m.p2char2}\t${m.p2char3}\t${m.p2char4}\t${m.p2name}\t${m.p2rank}\t${m.map}\t${m.winner}\n`;
+			str += `${m.time}\t${m.p1char1}\t${m.p1char2}\t${m.p1char3}\t${m.p1char4}\t${m.p1name1}\t${m.p1name2}\t${m.p1name3}\t${m.p1name4}\t${m.p1rank}\t`;
+			str += `${m.p2char1}\t${m.p2char2}\t${m.p2char3}\t${m.p2char4}\t${m.p2name1}\t${m.p2name2}\t${m.p2name3}\t${m.p2name4}\t${m.p2rank}\t${m.map}\t${m.winner}\n`;
 		});
 	}
 
