@@ -231,6 +231,22 @@ module.exports = {
 		"id": "halloweenmap22022",
 		"name": "Halloween Map 2 (2022)"
 	},
+	"halloweenmap12018": {
+		"id": "halloweenmap12018",
+		"name": "Halloween Map 1 (2018)"
+	},
+	"halloweenmap12022": {
+		"id": "halloweenmap12022",
+		"name": "Halloween Map 1 (2022)"
+	},
+	"halloweenmap22018": {
+		"id": "halloweenmap22018",
+		"name": "Halloween Map 2 (2018)"
+	},
+	"halloweenmap22020": {
+		"id": "halloweenmap22020",
+		"name": "Halloween Map 2 (2020)"
+	},
 	"8thkacqualifyinground": {
 		"id": "8thkacqualifyinground",
 		"name": "8th KAC Qualifying Round"
