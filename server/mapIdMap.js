@@ -266,5 +266,29 @@ module.exports = {
 	"minbohuntingchallenge": {
 		"id": "minbohuntingchallenge",
 		"name": "Minbo Hunting Challenge"
-	}
+	},
+	"karakuricastle1": {
+		"id": "karakuricastle1",
+		"name": "Karakuri Castle 1"
+	},
+	"karakuricastle2": {
+		"id": "karakuricastle2",
+		"name": "Karakuri Castle 2"
+	},
+	"karakuricastle3": {
+		"id": "karakuricastle3",
+		"name": "Karakuri Castle 3"
+	},
+	"karakuricastle4": {
+		"id": "karakuricastle4",
+		"name": "Karakuri Castle 4"
+	},
+	"karakuricastle41": {
+		"id": "karakuricastle41",
+		"name": "Karakuri Castle 4.1"
+	},
+	"karakuricastletwilight": {
+		"id": "karakuricastletwilight",
+		"name": "Karakuri Castle (Twilight)"
+	},
 };
