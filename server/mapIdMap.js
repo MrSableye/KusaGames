@@ -187,6 +187,10 @@ module.exports = {
 		"id": "snowvillagethawed",
 		"name": "Snow Village (Thawed)"
 	},
+	"snowvillagesnowlights": {
+		"id": "snowvillagesnowlights",
+		"name": "Snow Village (Snow Lights)"
+	},
 	"qmacollabtown1": {
 		"id": "qmacollabtown1",
 		"name": "QMA Collab Town 1"
