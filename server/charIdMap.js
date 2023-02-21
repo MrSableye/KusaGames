@@ -137,4 +137,10 @@ module.exports = {
 		"full": "Melon (メロン)",
 		"wiki": "https://gamerch.com/bombergirl/entry/486937"
 	},
+	"chigusa": {
+		"id": "chigusa",
+		"name": "Chigusa",
+		"full": "Chigusa (チグサ)",
+		"wiki": "https://gamerch.com/bombergirl/entry/653389"
+	},
 };
