@@ -125,6 +125,19 @@ function matchTest(mData, sq) {
 	let p2sqchars = frequencySet([sq.p2char1, sq.p2char2, sq.p2char3, sq.p2char4]);
 	let p2sqnames = frequencySet([sq.p2name1, sq.p2name2, sq.p2name3, sq.p2name4]);
 
+	// If player 1, character 1 is specified, it must match.
+	if (sq.p1char1) {
+		if (mData.p1char1 !== sq.p1char1) {
+			return false;
+		}
+	}
+
+	if (sq.p1name1) {
+		if (mData.p1name1 !== sq.p1name1) {
+			return false;
+		}
+	}
+
 	if (sq.map.length > 0) {
 		if (sq.map !== mData.map) {
 			return false;
