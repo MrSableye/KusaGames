@@ -43,8 +43,8 @@ module.exports = {
 	},
 	"aqua": {
 		"id": "aqua",
-		"name": "Aqua",
-		"full": "Aqua (アクア)",
+		"name": "Aquablue Lewysia",
+		"full": "Aquablue Lewysia (アクアブル レウィシア)",
 		"wiki": "https://gamerch.com/bombergirl/entry/477634"
 	},
 	"shiori": {
@@ -103,8 +103,8 @@ module.exports = {
 	},
 	"olive": {
 		"id": "olive",
-		"name": "Olive",
-		"full": "Olive (オリーヴ)",
+		"name": "Olive Drab",
+		"full": "Olive Drab (オリーヴ ドラブ)",
 		"wiki": "https://gamerch.com/bombergirl/entry/477811"
 	},
 	"prune": {
