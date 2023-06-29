@@ -104,44 +104,49 @@ module.exports = {
         "name": "Grandmaster C",
         "index": 20
     },
+    "legend": {
+        "id": "legend",
+        "name": "Legend",
+        "index": 21
+    },
     "pcranka": {
         "id": "pcranka",
         "name": "PC Rank A",
-        "index": 21
+        "index": 22
     },
     "pcrankb": {
         "id": "pcrankb",
         "name": "PC Rank B",
-        "index": 22
+        "index": 23
     },
     "pcrankc": {
         "id": "pcrankc",
         "name": "PC Rank C",
-        "index": 23
+        "index": 24
     },
     "pcrankd": {
         "id": "pcrankd",
         "name": "PC Rank D",
-        "index": 24
+        "index": 25
     },
     "pcranke": {
         "id": "pcranke",
         "name": "PC Rank E",
-        "index": 25
+        "index": 26
     },
     "pcrankf": {
         "id": "pcrankf",
         "name": "PC Rank F",
-        "index": 26
+        "index": 27
     },
     "pcranks": {
         "id": "pcranks",
         "name": "PC Rank S",
-        "index": 27
+        "index": 28
     },
     "pcrankss": {
         "id": "pcrankss",
         "name": "PC Rank SS",
-        "index": 28
+        "index": 29
     }
 };

@@ -19,6 +19,10 @@ module.exports = {
 		"id": "cyberspace5",
 		"name": "Cyberspace 5"
 	},
+	"cyberspacehexatower": {
+		"id": "cyberspacehexatower",
+		"name": "Cyberspace Hexatower"
+	},
 	"aquabluecastle1": {
 		"id": "aquabluecastle1",
 		"name": "Aquablue Castle 1"
@@ -111,9 +115,25 @@ module.exports = {
 		"id": "bombtown8",
 		"name": "Bomb Town 8"
 	},
+	"bombtown1rainbow": {
+		"id": "bombtown1rainbow",
+		"name": "Bomb Town 1 (Rainbow)"
+	},
+	"bombvolcano1": {
+		"id": "bombvolcano1",
+		"name": "Bomb Volcano 1"
+	},
+	"bombvolcano2": {
+		"id": "bombvolcano2",
+		"name": "Bomb Volcano 2"
+	},
 	"panicisland1": {
 		"id": "panicisland1",
 		"name": "Panic Island 1"
+	},
+	"panicisland11": {
+		"id": "panicisland11",
+		"name": "Panic Island 1.1"
 	},
 	"panicisland2": {
 		"id": "panicisland2",
